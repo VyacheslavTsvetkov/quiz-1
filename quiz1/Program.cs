@@ -9,7 +9,7 @@
 // [“1234”, “1567”, “-2”, “computer science”] → [“-2”]
 // [“Russia”, “Denmark”, “Kazan”] → []
 
-int Promt(string message)
+int Start(string message)
 {
     System.Console.WriteLine(message);
     int result = int.Parse(Console.ReadLine()!);
@@ -41,11 +41,37 @@ string[] FillArray(string[] array)
     return array;
 }
 
-string[] ThreeSymbolArray(string[] array)
+int CountLengthNewArray(string[] array)
 {
-
+    int count = 0;
+    int stringLength = 3;
+    for (int i = 0; i < array.Length; i++)
+    {
+        if (array[i].Length <= stringLength)
+        {
+            count++;
+        }
+    }
+    return count;
 }
-int N = Promt("Введите число элементов массива");
+
+string[] ThreeSymbolArray(string[] array, string[] newArray)
+{
+    int stringLength = 3;
+    int step = 0;
+    for (int i = 0; i < array.Length; i++)
+    {
+        if (array[i].Length <= stringLength)
+        {
+            newArray[step] = array[i];
+            step++;
+        }
+
+    }
+    return newArray;
+}
+
+int N = Start("Введите число элементов массива");
 Console.WriteLine();
 string[] stringArray = new string[N];
 
@@ -53,6 +79,9 @@ if (ValidateNumber(N))
 {
     FillArray(stringArray);
     Console.WriteLine($"Исходный массив - {string.Join(", ", stringArray)}");
+    string[] newStringArray = new string[CountLengthNewArray(stringArray)];
+    ThreeSymbolArray(stringArray, newStringArray);
+    Console.WriteLine($"Массив c элементами длиной менее 3-х символов - {string.Join(", ", newStringArray)}");
 }
 
 
